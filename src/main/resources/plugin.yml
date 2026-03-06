@@ -1,0 +1,9 @@
+name: hTreecapitator
+version: '1.0'
+main: fr.haily.hTreecapitator.HTreecapitator
+api-version: '1.21'
+load: STARTUP
+authors: [ Haily ]
+description: Treecapitator plugin.
+website: https://github.com/Haiilyyy
+softdepend: [ Jobs ]
