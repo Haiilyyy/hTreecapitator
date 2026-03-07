@@ -1,6 +1,64 @@
-options:
-  max_logs: 128
-  auto_pickup_drops: false
-  permission: ''
-  mangrove_roots: false
-  shift_to_activate: false
+#-------------------------------------------------------------------------------------------------#
+#                                                                                                 #
+# ██  ██ ██████ █████▄  ██████ ██████ ▄█████ ▄████▄ █████▄ ██ ██████ ▄████▄ ██████ ▄████▄ █████▄  #
+# ██████   ██   ██▄▄██▄ ██▄▄   ██▄▄   ██     ██▄▄██ ██▄▄█▀ ██   ██   ██▄▄██   ██   ██  ██ ██▄▄██▄ #
+# ██  ██   ██   ██   ██ ██▄▄▄▄ ██▄▄▄▄ ▀█████ ██  ██ ██     ██   ██   ██  ██   ██   ▀████▀ ██   ██ #
+#                                                                                                 #
+#-------------------------------------------------------------------------------------------------#
+
+# hTreecapitator by Haily
+
+# github: https://github.com/haiilyyy
+
+#---------------------------------------#
+#               [Config]                #
+#---------------------------------------#
+
+messages:
+  permission: '&c&l» &7You do not have permission to use this command!'
+  console: '&c&l» &7Only players can use this command!'
+  help:
+    - '&8[&m------------------------------------------------]'
+    - ''
+    - ' &8&l» &8/&htc reload &8- &7reload plugin!'
+    - ' &8&l» &8/&ahtc toggle &8- &7on/off!'
+    - ' &8&l» &8/&ahtc enchant [player] &8- &7give enchanted book!'
+    - ''
+    - '&8[&m------------------------------------------------]'
+  reload:
+    start: '&e&l» &7Reloading plugin...'
+    end: '&a&l» &7Plugin reloaded!'
+  toggle:
+    enable: '&a&l» &7Enabled cutting down trees!'
+    disable: '&c&l» &7Disabled cutting down trees!'
+  enchant:
+    give: '&a&l» &7You received a &aTreecapitator &7enchanted book!'
+    give-other: '&a&l» &7Gave a &aTreecapitator &7enchanted book to &a{player}&7!'
+
+# max blocks to cut at once
+max-blocks: 128
+
+# cut blocks automatically go to player inventory
+auto-pickup-drops: false
+
+# if true, only players with permission can cut down trees
+use-permissions: false
+permission: 'htreecapitator.use'
+
+# cut only if the player is using an axe
+axe-only: true
+
+# if true, the player must hold shift to cut down trees
+shift-mining: false
+
+# if true, mangrove roots will break with logs
+mangrove-roots: false
+
+# if true, the axe must have the Treecapitator enchantment
+# use /htc enchant to give the enchanted book, then apply it on an anvil
+require-enchantment: false
+
+# %htreecapitator_toggle% (PlaceholderAPI)
+placeholder:
+  toggle-on: '&a&lON'
+  toggle-off: '&c&lOFF'

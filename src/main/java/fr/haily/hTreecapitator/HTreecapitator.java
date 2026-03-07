@@ -1,89 +1,84 @@
 package fr.haily.hTreecapitator;
 
-import fr.haily.hTreecapitator.listener.JobsTreeCutListener;
+import fr.haily.hTreecapitator.commands.hTreecapitatorCommand;
+import fr.haily.hTreecapitator.config.Settings;
+import fr.haily.hTreecapitator.listener.AnvilListener;
 import fr.haily.hTreecapitator.listener.TreeCutListener;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.type.Leaves;
+import fr.haily.hTreecapitator.placeholders.PlaceholderRegistry;
+import fr.haily.hTreecapitator.service.LeafDecayService;
+import fr.haily.hTreecapitator.service.TreeCutService;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public final class HTreecapitator extends JavaPlugin {
 
     private static HTreecapitator instance;
 
-    public final BlockFace[] faces = new BlockFace[] { BlockFace.UP, BlockFace.DOWN, BlockFace.NORTH, BlockFace.NORTH_EAST, BlockFace.EAST, BlockFace.SOUTH_EAST, BlockFace.SOUTH, BlockFace.SOUTH_WEST, BlockFace.WEST, BlockFace.NORTH_WEST };
-
-    @Override
-    public void onEnable() {
-        saveDefaultConfig();
-
-        instance = this;
-
-        if(getServer().getPluginManager().getPlugin("Jobs") != null) {
-            getServer().getPluginManager().registerEvents(new JobsTreeCutListener(), this);
-        } else {
-            getServer().getPluginManager().registerEvents(new TreeCutListener(), this);
-        }
-
-    }
-
-    @Override
-    public void onDisable() {
-        instance = null;
-    }
-
     public static HTreecapitator getInstance() {
         return instance;
     }
 
-    public boolean isLog(Material material) {
-        String name = material.name();
-        if(getConfig().getBoolean("options.mangrove_roots") && name.equals("MANGROVE_ROOTS")) {
+    @Override
+    public void onEnable() {
+        instance = this;
+        Settings.loadConfig(false);
+
+        TreeCutService.start();
+        LeafDecayService.start();
+
+        infoMessage();
+        checkPlugins();
+
+        registerListeners();
+        registerCommand();
+        registerPapi();
+
+        loadBStats();
+    }
+
+    private void infoMessage() {
+        var logger = getLogger();
+        logger.info("");
+        logger.info("hTreecapitator by Haily!");
+        logger.info("");
+    }
+
+    private void checkPlugins() {
+        Settings.setPlaceholderApiEnabled(checkPlugin("PlaceholderAPI"));
+        Settings.setJobsEnabled(checkPlugin("Jobs"));
+        Settings.setWorldGuardEnabled(checkPlugin("WorldGuard"));
+        Settings.setGriefPreventionEnabled(checkPlugin("GriefPrevention"));
+    }
+
+    private boolean checkPlugin(String pluginName) {
+        var plugin = getServer().getPluginManager().getPlugin(pluginName);
+
+        if (plugin != null && plugin.isEnabled()) {
+            getLogger().info("Hooked to: " + pluginName);
             return true;
         }
-        return (name.endsWith("LOG") || name.equals("CRIMSON_STEM") || name.equalsIgnoreCase("WARPED_STEM")) && !name.startsWith("STRIPPED");
-    }
-
-    public boolean isLog(Block block) {
-        return isLog(block.getType());
-    }
-
-    public boolean isNaturalTree(Block block) {
-        List<Block> checkedLogs = new ArrayList<>();
-        List<Block> toCheck = new ArrayList<>();
-        toCheck.add(block);
-
-        while (!toCheck.isEmpty()) {
-            Block current = toCheck.remove(0);
-            checkedLogs.add(current);
-
-            for (BlockFace face : faces) {
-                BlockFace[] relatives = new BlockFace[] { BlockFace.SELF, BlockFace.UP, BlockFace.DOWN };
-                for (BlockFace rel : relatives) {
-                    Block neighbor = current.getRelative(face).getRelative(rel);
-
-                    if (neighbor.getBlockData() instanceof Leaves leaves) {
-                        if (!leaves.isPersistent()) {
-                            return true;
-                        }
-                    }
-
-                    if (HTreecapitator.getInstance().isLog(neighbor) && !checkedLogs.contains(neighbor)) {
-                        toCheck.add(neighbor);
-                    }
-                }
-            }
-
-            if (checkedLogs.size() > HTreecapitator.getInstance().getConfig().getInt("options.max_logs")) {
-                return false;
-            }
-        }
-
         return false;
     }
 
+    private void registerListeners() {
+        var pm = getServer().getPluginManager();
+        pm.registerEvents(new TreeCutListener(), this);
+        pm.registerEvents(new AnvilListener(), this);
+    }
+
+    private void registerCommand() {
+        Objects.requireNonNull(getCommand("htreecapitator")).setExecutor(new hTreecapitatorCommand());
+    }
+
+    private void registerPapi() {
+        if (Settings.isPlaceholderApiEnabled()) {
+            new PlaceholderRegistry().register();
+        }
+    }
+
+    private void loadBStats() {
+        new Metrics(this, ***REMOVED***);
+    }
 }
