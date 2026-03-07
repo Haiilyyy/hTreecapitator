@@ -1,9 +1,18 @@
 name: hTreecapitator
-version: '1.0'
+version: '${version}'
 main: fr.haily.hTreecapitator.HTreecapitator
 api-version: '1.21'
-load: STARTUP
 authors: [ Haily ]
 description: Treecapitator plugin.
 website: https://github.com/Haiilyyy
-softdepend: [ Jobs ]
+softdepend:
+  - Jobs
+  - PlaceholderAPI
+  - WorldGuard
+  - GriefPrevention
+commands:
+  htreecapitator:
+    aliases:
+      - htc
+    description: hTreecapitator main command.
+    usage: /htreecapitator
