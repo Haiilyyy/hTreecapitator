@@ -1,7 +1,7 @@
 # hTreecapitator
 Simple plugin that will allow you to chop whole tree at once!
 
-![Tree cut animation](https://cdn.modrinth.com/data/cached_images/74dcc4bfbb8c257cc049b72f11a8e54ec1c17034.gif)
+![Tree cut animation](https://cdn.modrinth.com/data/cached_images/493aa01faed3ec515ddd4aaf306a14efd26f21c6.gif)
 
 ## 🌟Features
 
