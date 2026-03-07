@@ -7,6 +7,7 @@ import fr.haily.hTreecapitator.listener.TreeCutListener;
 import fr.haily.hTreecapitator.placeholders.PlaceholderRegistry;
 import fr.haily.hTreecapitator.service.LeafDecayService;
 import fr.haily.hTreecapitator.service.TreeCutService;
+import fr.haily.hTreecapitator.utils.UpdateChecker;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -36,6 +37,7 @@ public final class HTreecapitator extends JavaPlugin {
         registerPapi();
 
         loadBStats();
+        UpdateChecker.check();
     }
 
     private void infoMessage() {
@@ -66,6 +68,7 @@ public final class HTreecapitator extends JavaPlugin {
         var pm = getServer().getPluginManager();
         pm.registerEvents(new TreeCutListener(), this);
         pm.registerEvents(new AnvilListener(), this);
+        pm.registerEvents(new UpdateChecker(), this);
     }
 
     private void registerCommand() {

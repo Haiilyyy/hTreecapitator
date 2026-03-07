@@ -20,7 +20,7 @@ messages:
   help:
     - '&8[&m------------------------------------------------]'
     - ''
-    - ' &8&l» &8/&htc reload &8- &7reload plugin!'
+    - ' &8&l» &8/&ahtc reload &8- &7reload plugin!'
     - ' &8&l» &8/&ahtc toggle &8- &7on/off!'
     - ' &8&l» &8/&ahtc enchant [player] &8- &7give enchanted book!'
     - ''
