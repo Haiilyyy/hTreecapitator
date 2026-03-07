@@ -40,7 +40,7 @@ Simple plugin that will allow you to chop whole tree at once!
       <td>On/Off cut trees</td>
     </tr>
     <tr>
-      <th>/htc enchant [player]</th>
+      <td>/htc enchant [player]</td>
       <td>htreecapitator.enchant</td>
       <td>give enchanted book</td>
     </tr>
