@@ -114,6 +114,10 @@ public class UpdateChecker implements Listener {
             return;
         }
 
+        if(!player.hasPermission("*")){
+            return;
+        }
+
         Bukkit.getScheduler().runTaskLater(HTreecapitator.getInstance(), () -> {
             player.sendMessage(ChatUtils.format("&7A update for &ahTreecapitator &7(&fv"+latestVersion+"&7) is available at &ahttps://modrinth.com/plugin/htreecapitator"));
         }, 40L);
