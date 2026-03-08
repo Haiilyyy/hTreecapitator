@@ -80,18 +80,15 @@ public class hTreecapitatorCommand implements CommandExecutor, TabCompleter {
             return;
         }
 
-        // Determine target player
         Player target;
 
         if (args.length >= 2) {
-            // /htc enchant <player>
             target = Bukkit.getPlayer(args[1]);
             if (target == null) {
                 sender.sendMessage(ChatUtils.format("&c&l» &7Player not found!"));
                 return;
             }
         } else {
-            // /htc enchant (self)
             if (!(sender instanceof Player p)) {
                 sender.sendMessage(ChatUtils.format(Settings.getConsoleMessage()));
                 return;
@@ -99,11 +96,9 @@ public class hTreecapitatorCommand implements CommandExecutor, TabCompleter {
             target = p;
         }
 
-        // Give enchanted book
         ItemStack book = EnchantUtils.createEnchantedBook();
         target.getInventory().addItem(book);
 
-        // Send messages
         if (target.equals(sender)) {
             target.sendMessage(ChatUtils.format(Settings.getEnchantGiveMessage()));
         } else {
