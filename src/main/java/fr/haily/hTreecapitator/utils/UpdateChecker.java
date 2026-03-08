@@ -78,7 +78,7 @@ public class UpdateChecker implements Listener {
     }
 
     private static boolean isNewerVersion(String latest, String current) {
-        // Remove 'v' prefix if present
+
         latest = latest.toLowerCase().replace("v", "");
         current = current.toLowerCase().replace("v", "");
 
@@ -110,11 +110,7 @@ public class UpdateChecker implements Listener {
 
         Player player = event.getPlayer();
 
-        if (!player.isOp()) {
-            return;
-        }
-
-        if(!player.hasPermission("*")){
+        if (!PermissionsUtils.hasPermission(player, "htreecapitator.updatenotify")) {
             return;
         }
 
