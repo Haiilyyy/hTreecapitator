@@ -1,10 +1,13 @@
 package fr.haily.hTreecapitator.utils;
 
 import fr.haily.hTreecapitator.HTreecapitator;
+import me.ryanhamshire.GriefPrevention.ClaimPermission;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import me.ryanhamshire.GriefPrevention.Claim;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.util.function.Supplier;
 
 public class GriefPreventionUtils {
 
@@ -15,7 +18,7 @@ public class GriefPreventionUtils {
             return true;
         }
 
-        String result = claim.allowBreak(player, location.getBlock().getType());
+        Supplier<String> result = claim.checkPermission(player, ClaimPermission.Build, null);
 
         return result == null;
     }

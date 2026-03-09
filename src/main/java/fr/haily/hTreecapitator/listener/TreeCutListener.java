@@ -25,6 +25,10 @@ public class TreeCutListener implements Listener {
             return;
         }
 
+        if (Settings.isWorldBlocked(event.getBlock().getWorld().getName())) {
+            return;
+        }
+
         Player player = event.getPlayer();
 
         if (Settings.getUsePermissions()) {

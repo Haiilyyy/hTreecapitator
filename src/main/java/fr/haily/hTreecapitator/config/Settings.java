@@ -81,6 +81,14 @@ public class Settings {
         return placeholderToggleOff;
     }
 
+    private static List<String> blockedWorlds;
+    public static List<String> getBlockedWorlds() {
+        return blockedWorlds;
+    }
+    public static boolean isWorldBlocked(String worldName) {
+        return blockedWorlds.contains(worldName);
+    }
+
     //permission
     private static boolean usePermissions;
     public static boolean getUsePermissions(){
@@ -146,11 +154,12 @@ public class Settings {
 
         var config = javaPlugin.getConfig();
 
-        maxBlocks = config.getInt("max-blocks");
-        autoPickup = config.getBoolean("auto-pickup-drops");
-        shiftMining = config.getBoolean("shift-mining");
-        axeOnly = config.getBoolean("axe-only");
-        requireEnchantment = config.getBoolean("require-enchantment");
+        maxBlocks = config.getInt("max-blocks", 128);
+        autoPickup = config.getBoolean("auto-pickup-drops", false);
+        shiftMining = config.getBoolean("shift-mining", false);
+        axeOnly = config.getBoolean("axe-only", true);
+        requireEnchantment = config.getBoolean("require-enchantment", false);
+        blockedWorlds = config.getStringList("blocked-worlds");
 
         placeholderToggleOn = config.getString("placeholder.toggle-on");
         placeholderToggleOff = config.getString("placeholder.toggle-off");

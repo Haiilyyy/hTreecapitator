@@ -2,7 +2,6 @@ package fr.haily.hTreecapitator.utils;
 
 import fr.haily.hTreecapitator.HTreecapitator;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +10,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.util.stream.Collectors;
 
@@ -48,7 +48,7 @@ public class UpdateChecker implements Listener {
     }
 
     private static String fetchLatestRelease() throws Exception {
-        URL url = new URL("https://api.github.com/repos/Haiilyyy/hTreecapitator/releases/latest");
+        URL url = new URI("https://api.github.com/repos/Haiilyyy/hTreecapitator/releases/latest").toURL();
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Accept", "application/vnd.github.v3+json");
