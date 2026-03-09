@@ -5,6 +5,7 @@ import fr.haily.hTreecapitator.config.Settings;
 import fr.haily.hTreecapitator.utils.DurabilityUtils;
 import fr.haily.hTreecapitator.utils.JobsUtils;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -42,15 +43,31 @@ public class TreeCutService {
                         continue;
                     }
 
-                    Block block = task.nextBlock();
-
-                    if (!breakBlock(task.player, block)) {
+                    if (Settings.getInstantBreakLogs()) {
+                        while (!task.isFinished()) {
+                            Block block = task.nextBlock();
+                            if (!breakBlock(task.player, block)) {
+                                break;
+                            }
+                            task.processedLogs.add(block);
+                        }
+                        if (Settings.getSoundEnabled()) {
+                            task.player.playSound(task.player.getLocation(), Settings.getSound(), 0.5f, 1.5f);
+                        }
                         LeafDecayService.scanLeaves(task.processedLogs, task.player);
                         iterator.remove();
-                        continue;
+                    } else {
+                        Block block = task.nextBlock();
+                        if (!breakBlock(task.player, block)) {
+                            LeafDecayService.scanLeaves(task.processedLogs, task.player);
+                            iterator.remove();
+                            continue;
+                        }
+                        task.processedLogs.add(block);
+                        if (Settings.getSoundEnabled()) {
+                            task.player.playSound(block.getLocation(), Settings.getSound(), 0.5f, 1.5f);
+                        }
                     }
-
-                    task.processedLogs.add(block);
                 }
             }
         }.runTaskTimer(HTreecapitator.getInstance(), 0L, 1L);

@@ -15,6 +15,10 @@ public class DurabilityUtils {
     }
 
     public static boolean damageTool(Player player) {
+        if (player.getGameMode() == org.bukkit.GameMode.CREATIVE) {
+            return true;
+        }
+
         ItemStack item = player.getInventory().getItemInMainHand();
 
         if (item.getType() == Material.AIR) {
