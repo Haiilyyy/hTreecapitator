@@ -121,6 +121,17 @@ blocked-worlds:
 # cut blocks automatically go to player inventory
 auto-pickup-drops: false
 
+# if true, all logs break instantly instead of progressively
+instant-break-logs: false
+
+# if true, all leaves break instantly instead of progressively
+instant-break-leaves: false
+
+# play a sound when cutting trees
+# sound type: WOOD, BELL, ORB
+sound: false
+sound-type: WOOD
+
 # if true, only players with permission can cut down trees
 use-permissions: false
 permission: 'htreecapitator.use'
