@@ -68,6 +68,7 @@ Simple plugin that will allow you to chop whole tree at once!
   </tbody>
 </table>
 
+## ⚙️Config
 <details>
 <summary>config.yml</summary>
 
