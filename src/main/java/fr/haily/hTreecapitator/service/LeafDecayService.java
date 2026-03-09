@@ -66,11 +66,13 @@ public class LeafDecayService {
     }
 
     private static boolean shouldDecay(Block block) {
-        if (!(block.getBlockData() instanceof Leaves leaves)) {
-            return false;
-        }
+        if (block.getBlockData() instanceof Leaves leaves) {
+            if (leaves.isPersistent()) {
+                return false;
+            }
+        } else if (BlockUtils.isNetherLeaves(block.getType())) {
 
-        if (leaves.isPersistent()) {
+        } else {
             return false;
         }
 
@@ -91,6 +93,8 @@ public class LeafDecayService {
                 if (!leaves.isPersistent()) {
                     output.add(relative);
                 }
+            } else if (BlockUtils.isNetherLeaves(relative.getType())) {
+                output.add(relative);
             }
         }
     }

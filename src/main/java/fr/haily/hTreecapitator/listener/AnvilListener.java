@@ -33,7 +33,9 @@ public class AnvilListener implements Listener {
         }
 
         ItemStack result = first.clone();
-        EnchantUtils.applyEnchant(result);
+        if (!EnchantUtils.applyEnchant(result)) {
+            return;
+        }
 
         event.setResult(result);
         inv.setRepairCost(1);

@@ -45,7 +45,6 @@ public class TreeCutService {
                     Block block = task.nextBlock();
 
                     if (!breakBlock(task.player, block)) {
-                        // Tool broke, finish task and decay leaves
                         LeafDecayService.scanLeaves(task.processedLogs, task.player);
                         iterator.remove();
                         continue;
@@ -61,24 +60,17 @@ public class TreeCutService {
         breakTasks.add(new BreakTask(player, blocks));
     }
 
-    /**
-     * Break a single block and damage the player's tool.
-     *
-     * @return true if the tool is still usable, false if it broke
-     */
     private static boolean breakBlock(Player player, Block block) {
         if (block == null || block.getType() == Material.AIR) {
             return true;
         }
 
-        // Jobs integration
         if (Settings.isJobsEnabled()) {
             try {
                 JobsUtils.giveJobsXp(player.getUniqueId(), block);
             } catch (NoClassDefFoundError ignored) {}
         }
 
-        // Break the block
         if (Settings.getAutoPickup()) {
             for (ItemStack item : block.getDrops(player.getInventory().getItemInMainHand())) {
                 player.getInventory().addItem(item);
@@ -88,7 +80,6 @@ public class TreeCutService {
             block.breakNaturally(player.getInventory().getItemInMainHand());
         }
 
-        // Damage the tool (returns false if the tool broke)
         return DurabilityUtils.damageTool(player);
     }
 

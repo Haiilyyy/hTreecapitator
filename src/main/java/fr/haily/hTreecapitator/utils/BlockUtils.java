@@ -36,6 +36,12 @@ public class BlockUtils {
         return isLog(block.getType());
     }
 
+    public static boolean isNetherLeaves(Material material) {
+        return material == Material.NETHER_WART_BLOCK
+                || material == Material.WARPED_WART_BLOCK
+                || material == Material.SHROOMLIGHT;
+    }
+
     public static boolean isNaturalTree(Block block) {
         Set<Block> visited = new HashSet<>();
         Deque<Block> toCheck = new ArrayDeque<>();
@@ -53,6 +59,10 @@ public class BlockUtils {
                         if (!leaves.isPersistent()) {
                             return true;
                         }
+                    }
+
+                    if (isNetherLeaves(neighbor.getType())) {
+                        return true;
                     }
 
                     if (isLog(neighbor) && visited.add(neighbor)) {
