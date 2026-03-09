@@ -1,6 +1,7 @@
 package fr.haily.hTreecapitator.config;
 
 import fr.haily.hTreecapitator.HTreecapitator;
+import org.bukkit.Sound;
 
 import java.util.List;
 
@@ -89,6 +90,34 @@ public class Settings {
         return blockedWorlds.contains(worldName);
     }
 
+    private static boolean instantBreakLogs;
+    public static boolean getInstantBreakLogs() {
+        return instantBreakLogs;
+    }
+
+    private static boolean instantBreakLeaves;
+    public static boolean getInstantBreakLeaves() {
+        return instantBreakLeaves;
+    }
+
+    private static boolean soundEnabled;
+    public static boolean getSoundEnabled() {
+        return soundEnabled;
+    }
+
+    private static String soundType;
+    public static String getSoundType() {
+        return soundType;
+    }
+
+    public static Sound getSound() {
+        return switch (soundType.toUpperCase()) {
+            case "BELL" -> Sound.BLOCK_NOTE_BLOCK_BELL;
+            case "ORB" -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
+            default -> Sound.BLOCK_WOOD_BREAK;
+        };
+    }
+
     //permission
     private static boolean usePermissions;
     public static boolean getUsePermissions(){
@@ -160,6 +189,10 @@ public class Settings {
         axeOnly = config.getBoolean("axe-only", true);
         requireEnchantment = config.getBoolean("require-enchantment", false);
         blockedWorlds = config.getStringList("blocked-worlds");
+        instantBreakLogs = config.getBoolean("instant-break-logs", false);
+        instantBreakLeaves = config.getBoolean("instant-break-leaves", false);
+        soundEnabled = config.getBoolean("sound", false);
+        soundType = config.getString("sound-type", "WOOD");
 
         placeholderToggleOn = config.getString("placeholder.toggle-on");
         placeholderToggleOff = config.getString("placeholder.toggle-off");

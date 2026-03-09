@@ -1,6 +1,7 @@
 package fr.haily.hTreecapitator.service;
 
 import fr.haily.hTreecapitator.HTreecapitator;
+import fr.haily.hTreecapitator.config.Settings;
 import fr.haily.hTreecapitator.utils.BlockUtils;
 import fr.haily.hTreecapitator.utils.ProtectionUtils;
 import org.bukkit.Material;
@@ -61,8 +62,20 @@ public class LeafDecayService {
             }
         }
 
-        Collections.shuffle(decayLeaves);
-        blocksQueue.add(new ArrayDeque<>(decayLeaves));
+        if (decayLeaves.isEmpty()) {
+            return;
+        }
+
+        if (Settings.getInstantBreakLeaves()) {
+            for (Block leaf : decayLeaves) {
+                if (leaf.getType() != Material.AIR) {
+                    leaf.breakNaturally();
+                }
+            }
+        } else {
+            Collections.shuffle(decayLeaves);
+            blocksQueue.add(new ArrayDeque<>(decayLeaves));
+        }
     }
 
     private static boolean shouldDecay(Block block) {

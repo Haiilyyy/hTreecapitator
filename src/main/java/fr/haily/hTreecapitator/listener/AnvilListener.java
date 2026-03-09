@@ -1,6 +1,8 @@
 package fr.haily.hTreecapitator.listener;
 
+import fr.haily.hTreecapitator.HTreecapitator;
 import fr.haily.hTreecapitator.utils.EnchantUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,5 +41,9 @@ public class AnvilListener implements Listener {
 
         event.setResult(result);
         inv.setRepairCost(1);
+
+        Bukkit.getScheduler().runTask(HTreecapitator.getInstance(), () -> {
+            inv.setItem(2, result);
+        });
     }
 }
