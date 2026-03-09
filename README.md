@@ -68,6 +68,7 @@ Simple plugin that will allow you to chop whole tree at once!
   </tbody>
 </table>
 
+## ⚙️Config
 <details>
 <summary>config.yml</summary>
 
@@ -83,6 +84,7 @@ Simple plugin that will allow you to chop whole tree at once!
 # hTreecapitator by Haily
 
 # github: https://github.com/haiilyyy
+# discord: https://discord.com/invite/RZ6VX6XcH2
 
 #---------------------------------------#
 #               [Config]                #
@@ -111,6 +113,10 @@ messages:
 
 # max blocks to cut at once
 max-blocks: 128
+
+# worlds where treecapitator is disabled
+blocked-worlds:
+  - 'example_world'
 
 # cut blocks automatically go to player inventory
 auto-pickup-drops: false
