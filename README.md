@@ -1,3 +1,77 @@
+# hTreecapitator
+Simple plugin that will allow you to chop whole tree at once!
+
+![Tree cut animation](https://cdn.modrinth.com/data/cached_images/493aa01faed3ec515ddd4aaf306a14efd26f21c6.gif)
+
+## 🌟Features
+
+- Support Jobs plugin
+- Destroys tools
+- Permissions
+- Custom enchantement
+- Full Configurable
+- WorldGuard / GriefPrevention / Towny / Lands regions support!
+- **On/Off** player command
+
+## 🚀Commands
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Command</th>
+      <th scope="col">Permission</th>
+      <th scope="col">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/htc</td>
+      <td>htreecapitator.help</td>
+      <td>Help</td>
+    </tr>
+    <tr>
+      <td>/htc reload</td>
+      <td>htreecapitator.reload</td>
+      <td>Reload config.yml</td>
+    </tr>
+    <tr>
+      <td>/htc toggle</td>
+      <td>htreecapitator.toggle</td>
+      <td>On/Off cut trees</td>
+    </tr>
+    <tr>
+      <td>/htc enchant [player]</td>
+      <td>htreecapitator.enchant</td>
+      <td>give enchanted book</td>
+    </tr>
+  </tbody>
+</table>
+
+## ⭐PlaceholderAPI
+
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Placeholder</th>
+      <th scope="col">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>%htreecapitator_toggle% </td>
+      <td>Get player tree cutting toggle</td>
+    </tr>
+    <tr>
+      <td>%htreecapitator_raw_toggle%</td>
+      <td>Get raw player tree cutting toggle</td>
+    </tr>
+  </tbody>
+</table>
+
+<details>
+<summary>config.yml</summary>
+
+```
 #-------------------------------------------------------------------------------------------------#
 #                                                                                                 #
 # ██  ██ ██████ █████▄  ██████ ██████ ▄█████ ▄████▄ █████▄ ██ ██████ ▄████▄ ██████ ▄████▄ █████▄  #
@@ -67,3 +141,9 @@ require-enchantment: false
 placeholder:
   toggle-on: '&a&lON'
   toggle-off: '&c&lOFF'
+```
+
+</details>
+
+## 📊Stats
+![stats](https://bstats.org/signatures/bukkit/htreecapitator.svg)
