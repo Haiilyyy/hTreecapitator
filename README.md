@@ -44,6 +44,11 @@ Simple plugin that will allow you to chop whole tree at once!
       <td>htreecapitator.enchant</td>
       <td>give enchanted book</td>
     </tr>
+    <tr>
+      <td> </td>
+      <td>htreecapitator.updatenotify </td>
+      <td>Get update notification</td>
+    </tr>
   </tbody>
 </table>
 
@@ -120,17 +125,6 @@ blocked-worlds:
 
 # cut blocks automatically go to player inventory
 auto-pickup-drops: false
-
-# if true, all logs break instantly instead of progressively
-instant-break-logs: false
-
-# if true, all leaves break instantly instead of progressively
-instant-break-leaves: false
-
-# play a sound when cutting trees
-# sound type: WOOD, BELL, ORB
-sound: false
-sound-type: WOOD
 
 # if true, only players with permission can cut down trees
 use-permissions: false
