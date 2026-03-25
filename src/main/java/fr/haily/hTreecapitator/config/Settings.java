@@ -11,8 +11,6 @@ public class Settings {
         throw new IllegalStateException("This class cannot be instantiated");
     }
 
-    //addons
-
     private static boolean placeholderApiEnabled;
     public static boolean isPlaceholderApiEnabled(){
         return placeholderApiEnabled;
@@ -45,13 +43,11 @@ public class Settings {
         griefPreventionEnabled = GriefPrevention;
     }
 
-    //block limits
     private static int maxBlocks;
     public static int getMaxBlocks(){
         return maxBlocks;
     }
 
-    //settings
     private static boolean autoPickup;
     public static boolean getAutoPickup(){
         return autoPickup;
@@ -110,15 +106,16 @@ public class Settings {
         return soundType;
     }
 
+    private static Sound soundObj;
     public static Sound getSound() {
-        return switch (soundType.toUpperCase()) {
-            case "BELL" -> Sound.BLOCK_NOTE_BLOCK_BELL;
-            case "ORB" -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
-            default -> Sound.BLOCK_WOOD_BREAK;
-        };
+        return soundObj;
     }
 
-    //permission
+    private static boolean mangroveRoots;
+    public static boolean isMangroveRoots() {
+        return mangroveRoots;
+    }
+
     private static boolean usePermissions;
     public static boolean getUsePermissions(){
         return usePermissions;
@@ -129,7 +126,6 @@ public class Settings {
         return permission;
     }
 
-    //messages
     private static String permissionMessage;
     public static String getPermissionMessage(){
         return permissionMessage;
@@ -170,6 +166,11 @@ public class Settings {
         return enchantGiveOtherMessage;
     }
 
+    private static String inventoryFullMessage;
+    public static String getInventoryFullMessage() {
+        return inventoryFullMessage;
+    }
+
     private static List<String> helpMessage;
     public static List<String> getHelpMessage(){
         return helpMessage;
@@ -193,6 +194,12 @@ public class Settings {
         instantBreakLeaves = config.getBoolean("instant-break-leaves", false);
         soundEnabled = config.getBoolean("sound", false);
         soundType = config.getString("sound-type", "WOOD");
+        soundObj = switch (soundType.toUpperCase()) {
+            case "BELL" -> Sound.BLOCK_NOTE_BLOCK_BELL;
+            case "ORB" -> Sound.ENTITY_EXPERIENCE_ORB_PICKUP;
+            default -> Sound.BLOCK_WOOD_BREAK;
+        };
+        mangroveRoots = config.getBoolean("mangrove-roots", false);
 
         placeholderToggleOn = config.getString("placeholder.toggle-on");
         placeholderToggleOff = config.getString("placeholder.toggle-off");
@@ -209,6 +216,7 @@ public class Settings {
         toggleMessageOff = config.getString("messages.toggle.disable");
         enchantGiveMessage = config.getString("messages.enchant.give");
         enchantGiveOtherMessage = config.getString("messages.enchant.give-other");
+        inventoryFullMessage = config.getString("messages.inventory-full");
     }
 
 }

@@ -35,6 +35,7 @@ messages:
   enchant:
     give: '&a&l» &7You received a &aTreecapitator &7enchanted book!'
     give-other: '&a&l» &7Gave a &aTreecapitator &7enchanted book to &a{player}&7!'
+  inventory-full: '&c&l» &7Your inventory is full, items are being dropped on the ground!'
 
 # max blocks to cut at once
 max-blocks: 128

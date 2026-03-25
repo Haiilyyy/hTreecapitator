@@ -68,6 +68,8 @@ public class DurabilityUtils {
             return Integer.MAX_VALUE;
         }
 
-        return maxDurability - damageable.getDamage();
+        int remaining = maxDurability - damageable.getDamage();
+        int unbreakingLevel = item.getEnchantmentLevel(Enchantment.UNBREAKING);
+        return unbreakingLevel > 0 ? remaining * (unbreakingLevel + 1) : remaining;
     }
 }

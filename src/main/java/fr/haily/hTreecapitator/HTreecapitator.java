@@ -6,6 +6,7 @@ import fr.haily.hTreecapitator.listener.AnvilListener;
 import fr.haily.hTreecapitator.listener.TreeCutListener;
 import fr.haily.hTreecapitator.placeholders.PlaceholderRegistry;
 import fr.haily.hTreecapitator.service.LeafDecayService;
+import fr.haily.hTreecapitator.service.ToggleService;
 import fr.haily.hTreecapitator.service.TreeCutService;
 import fr.haily.hTreecapitator.utils.UpdateChecker;
 import org.bstats.bukkit.Metrics;
@@ -25,6 +26,7 @@ public final class HTreecapitator extends JavaPlugin {
     public void onEnable() {
         instance = this;
         Settings.loadConfig(false);
+        ToggleService.load();
 
         TreeCutService.start();
         LeafDecayService.start();

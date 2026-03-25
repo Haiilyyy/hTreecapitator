@@ -39,6 +39,10 @@ public class ProtectionUtils {
             } catch (NoClassDefFoundError ignored) {}
         }
 
+        if (Settings.isWorldGuardEnabled() || Settings.isGriefPreventionEnabled()) {
+            return true;
+        }
+
         processing.add(block);
         BlockBreakEvent testEvent = new BlockBreakEvent(block, player);
         getServer().getPluginManager().callEvent(testEvent);

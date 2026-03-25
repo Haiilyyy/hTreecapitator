@@ -39,6 +39,15 @@ public class AnvilListener implements Listener {
             return;
         }
 
+        String rename = inv.getRenameText();
+        if (rename != null && !rename.isBlank()) {
+            var meta = result.getItemMeta();
+            if (meta != null) {
+                meta.setDisplayName(rename);
+                result.setItemMeta(meta);
+            }
+        }
+
         event.setResult(result);
         inv.setRepairCost(1);
 

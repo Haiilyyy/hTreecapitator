@@ -57,22 +57,22 @@ public class TreeCutListener implements Listener {
             return;
         }
 
-        if (!BlockUtils.isNaturalTree(event.getBlock())) {
-            return;
-        }
-
         if (Settings.getShiftMining() && !player.isSneaking()) {
             return;
         }
 
-        List<Block> allLogs = BlockUtils.collectLogs(event.getBlock());
+        List<Block> allLogs = BlockUtils.collectLogsIfNatural(event.getBlock());
+        if (allLogs == null) {
+            return;
+        }
 
         int maxUses = DurabilityUtils.getRemainingUses(player.getInventory().getItemInMainHand());
         if (maxUses < allLogs.size()) {
             allLogs = allLogs.subList(0, maxUses);
         }
 
-        allLogs.removeIf(log -> !ProtectionUtils.canBreak(player, log));
+        Block startBlock = event.getBlock();
+        allLogs.removeIf(log -> !log.equals(startBlock) && !ProtectionUtils.canBreak(player, log));
 
         if (allLogs.isEmpty()) {
             return;
