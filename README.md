@@ -89,7 +89,8 @@ Simple plugin that will allow you to chop whole tree at once!
 # hTreecapitator by Haily
 
 # github: https://github.com/haiilyyy
-# discord: https://discord.com/invite/RZ6VX6XcH2
+# discord: https://discord.com/invite/kyr5PYQZr8
+# x: https://x.com/hailyxie
 
 #---------------------------------------#
 #               [Config]                #
@@ -115,6 +116,7 @@ messages:
   enchant:
     give: '&a&l» &7You received a &aTreecapitator &7enchanted book!'
     give-other: '&a&l» &7Gave a &aTreecapitator &7enchanted book to &a{player}&7!'
+  inventory-full: '&c&l» &7Your inventory is full, items are being dropped on the ground!'
 
 # max blocks to cut at once
 max-blocks: 128
@@ -125,6 +127,17 @@ blocked-worlds:
 
 # cut blocks automatically go to player inventory
 auto-pickup-drops: false
+
+# if true, all logs break instantly instead of progressively
+instant-break-logs: false
+
+# if true, all leaves break instantly instead of progressively
+instant-break-leaves: false
+
+# play a sound when cutting trees
+# sound type: WOOD, BELL, ORB
+sound: false
+sound-type: WOOD
 
 # if true, only players with permission can cut down trees
 use-permissions: false
