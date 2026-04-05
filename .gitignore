@@ -118,4 +118,4 @@ gradle/
 .gradle-cache/
 gradlew
 gradlew.bat
-gradle.propertiesgradle.properties
+gradle.properties
