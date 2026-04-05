@@ -1,5 +1,7 @@
 package fr.haily.hTreecapitator;
 
+import dev.faststats.bukkit.BukkitMetrics;
+import dev.faststats.core.ErrorTracker;
 import fr.haily.hTreecapitator.commands.hTreecapitatorCommand;
 import fr.haily.hTreecapitator.config.Settings;
 import fr.haily.hTreecapitator.listener.AnvilListener;
@@ -10,13 +12,18 @@ import fr.haily.hTreecapitator.service.ToggleService;
 import fr.haily.hTreecapitator.service.TreeCutService;
 import fr.haily.hTreecapitator.utils.UpdateChecker;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 public final class HTreecapitator extends JavaPlugin {
 
+    public static final ErrorTracker ERROR_TRACKER = ErrorTracker.contextAware();
+
     private static HTreecapitator instance;
+    private BukkitMetrics fastStatsMetrics;
 
     public static HTreecapitator getInstance() {
         return instance;
@@ -39,7 +46,15 @@ public final class HTreecapitator extends JavaPlugin {
         registerPapi();
 
         loadBStats();
+        loadFastStats();
         UpdateChecker.check();
+    }
+
+    @Override
+    public void onDisable() {
+        if (fastStatsMetrics != null) {
+            fastStatsMetrics.shutdown();
+        }
     }
 
     private void infoMessage() {
@@ -83,7 +98,19 @@ public final class HTreecapitator extends JavaPlugin {
         }
     }
 
+    private YamlConfiguration loadPluginYml() {
+        return YamlConfiguration.loadConfiguration(new InputStreamReader(Objects.requireNonNull(getResource("plugin.yml"))));
+    }
+
     private void loadBStats() {
-        new Metrics(this, ***REMOVED***);
+        new Metrics(this, loadPluginYml().getInt("bstats-id"));
+    }
+
+    private void loadFastStats() {
+        fastStatsMetrics = BukkitMetrics.factory()
+                .token(loadPluginYml().getString("faststats-token", ""))
+                .create(this);
+        fastStatsMetrics.ready();
     }
 }
+

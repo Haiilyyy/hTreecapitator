@@ -2,6 +2,8 @@ package fr.haily.hTreecapitator.utils;
 
 import fr.haily.hTreecapitator.HTreecapitator;
 import org.bukkit.Bukkit;
+
+import static fr.haily.hTreecapitator.HTreecapitator.ERROR_TRACKER;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,6 +60,7 @@ public class UpdateChecker implements Listener {
             } catch (Exception e) {
                 HTreecapitator.getInstance().getLogger().warning("Update check failed: " + e.getMessage());
                 e.printStackTrace();
+                ERROR_TRACKER.trackError(e);
             }
         });
     }
@@ -105,6 +108,7 @@ public class UpdateChecker implements Listener {
             return json.substring(start, end);
         } catch (Exception e) {
             HTreecapitator.getInstance().getLogger().warning("Error parsing version: " + e.getMessage());
+            ERROR_TRACKER.trackError(e);
             return null;
         }
     }
@@ -134,6 +138,7 @@ public class UpdateChecker implements Listener {
             return false;
         } catch (Exception e) {
             HTreecapitator.getInstance().getLogger().warning("Error comparing versions: " + e.getMessage());
+            ERROR_TRACKER.trackError(e);
             return false;
         }
     }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'fr.haily'
-version = '1.2.0'
+version = '1.2.1'
 
 repositories {
     mavenCentral()
@@ -18,12 +18,17 @@ repositories {
     maven { url = "https://repo.bg-software.com/repository/api/" }
     maven { url = "https://nexus.neetgames.com/repository/maven-releases/" }
     maven { url = 'https://repo.extendedclip.com/releases/' }
+    maven { url = 'https://repo.faststats.dev/releases' }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     //bstats
     implementation("org.bstats:bstats-bukkit:3.2.1")
+    //FastStats
+    implementation("dev.faststats.metrics:bukkit:0.21.0") {
+        exclude group: 'com.google.code.gson', module: 'gson'
+    }
     //JobsReborn
     compileOnly('com.github.Zrips:Jobs:v5.2.6.2') {
         exclude group: 'com.gmail.nossr50.mcMMO'
@@ -42,6 +47,7 @@ dependencies {
 
 shadowJar {
     relocate 'org.bstats', 'fr.haily.hTreecapitator'
+    relocate 'dev.faststats', 'fr.haily.libs.faststats'
     archiveClassifier.set("")
 }
 
@@ -64,7 +70,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 processResources {
-    def props = [version: version]
+    def props = [version: version, bstatsId: findProperty("bstatsId") ?: '0', fastStatsToken: findProperty('fastStatsToken') ?: '']
     inputs.properties props
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {

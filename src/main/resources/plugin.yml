@@ -16,3 +16,5 @@ commands:
       - htc
     description: hTreecapitator main command.
     usage: /htreecapitator
+bstats-id: '${bstatsId}'
+faststats-token: '${fastStatsToken}'

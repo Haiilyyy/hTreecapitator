@@ -3,6 +3,8 @@ package fr.haily.hTreecapitator.service;
 import fr.haily.hTreecapitator.HTreecapitator;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import static fr.haily.hTreecapitator.HTreecapitator.ERROR_TRACKER;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
@@ -40,6 +42,7 @@ public class ToggleService {
             config.save(getFile());
         } catch (IOException e) {
             HTreecapitator.getInstance().getLogger().warning("Failed to save toggles: " + e.getMessage());
+            ERROR_TRACKER.trackError(e);
         }
     }
 
