@@ -21,7 +21,7 @@ public class UpdateChecker implements Listener {
     private static String latestVersion = null;
     private static boolean updateAvailable = false;
     private static long lastCheckTime = 0;
-    private static final long CHECK_INTERVAL = 10800000;
+    private static final long CHECK_INTERVAL = 432000; //6 hours
 
     public UpdateChecker() {}
 
